@@ -1,5 +1,1 @@
 package everodell
-
-func main() {
-
-}
