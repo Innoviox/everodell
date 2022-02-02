@@ -7,3 +7,11 @@ const (
 	Summer
 	Autumn
 )
+
+type Component int
+const (
+	Wood Season = iota
+	Resin
+	Pebble
+	Berry
+)
