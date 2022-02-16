@@ -6,5 +6,10 @@ type Card struct {
 
 	points int
 
+	color Color
+	unique bool
+	construction bool
+	partner string
+
 	// action *Action
 }

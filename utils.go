@@ -10,7 +10,7 @@ const (
 
 type Component int
 const (
-	Wood Component = iota
+	Twig Component = iota
 	Resin
 	Pebble
 	Berry
@@ -26,7 +26,7 @@ const (
 )
 
 type Bundle struct {
-	nWood int
+	nTwig int
 	nResin int
 	nPebble int
 	nBerry int
