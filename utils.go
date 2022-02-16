@@ -10,10 +10,19 @@ const (
 
 type Component int
 const (
-	Wood Season = iota
+	Wood Component = iota
 	Resin
 	Pebble
 	Berry
+)
+
+type Color int
+const (
+	Tan Color = iota
+	Green
+	Red
+	Blue
+	Purple
 )
 
 type Bundle struct {
