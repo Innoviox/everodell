@@ -2,9 +2,9 @@ package everodell
 
 type Card struct {
 	name string
-	cost []Component
+	cost Bundle
 
 	points int
 
-	action *Action
+	// action *Action
 }

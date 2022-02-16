@@ -15,3 +15,10 @@ const (
 	Pebble
 	Berry
 )
+
+type Bundle struct {
+	nWood int
+	nResin int
+	nPebble int
+	nBerry int
+}
