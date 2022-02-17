@@ -3,7 +3,8 @@ package everodell
 type Player struct {
 	hand []Card
 
-	city []Card
+	city   []Card
+	ghosts []Card // for wife & wanderer
 
 	resources Bundle
 	season    Season

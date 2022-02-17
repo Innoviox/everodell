@@ -15,9 +15,10 @@ type Card struct {
 	construction bool
 	yield        Bundle
 
-	occupied bool // if critter => partnered
-
-	// action *Action
+	/* 0 = not occupied/partnered
+	   1 = occupied/partnered
+	   2 = occupied/partnered with farm & wife/husband (only for this case) */
+	occupied int
 }
 
 func (g *Game) readCards() {
@@ -51,7 +52,7 @@ func (g *Game) readCards() {
 				construction: readBool(line[7]),
 				yield:        readBundle(line[8]),
 
-				occupied: false,
+				occupied: 0,
 			})
 		}
 	}
@@ -62,8 +63,8 @@ func (g *Game) canPlayCard(p *Player, c Card) int {
 		return 0 // 0 => can't play
 	}
 
-	for _, built := range p.city {
-		if built.name == c.partner && !built.occupied {
+	for _, built := range find(p.city, c.partner) {
+		if built.construction && built.occupied == 0 {
 			return 1 // => can play for free
 		}
 	}
@@ -81,18 +82,33 @@ func (g *Game) playCard(p *Player, c Card) {
 	if n == 0 {
 		return
 	} else if n == 1 {
-		for _, built := range p.city {
-			if built.name == c.partner {
-				built.occupied = true
-				c.occupied = true
-				break
-			}
+		for _, built := range find(p.city, c.partner) {
+			built.occupied = 1
+			c.occupied = 1
+			break
 		}
 	} else {
 		p.resources.pay(c.cost)
 	}
 
-	p.city = append(p.city, c)
+	if c.name == "Wife" {
+		found := false
+		for _, husband := range find(p.city, "Husband") {
+			if husband.occupied == 0 {
+				husband.occupied = 2
+				c.occupied = 2
+				p.ghosts = append(p.ghosts, c)
+				found = true
+				break
+			}
+		}
+
+		if !found {
+			p.city = append(p.city, c)
+		}
+	} else {
+		p.city = append(p.city, c)
+	}
 
 	g.processPlay(p, c)
 }
@@ -112,6 +128,9 @@ func (g *Game) processPlay(p *Player, c Card) {
 
 func (g *Game) trigger(p *Player, c Card) {
 	switch c.name {
-
+	case "Husband":
+		if c.occupied == 2 {
+			// todo gain any
+		}
 	}
 }

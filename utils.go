@@ -137,3 +137,15 @@ func sample[T](k int, arr []T) []T {
 
 	return res
 }
+
+func find(arr []Card, name string) []Card {
+	var res []Card
+
+	for _, c := range arr {
+		if c.name == name {
+			res = append(res, c)
+		}
+	}
+
+	return res
+}
