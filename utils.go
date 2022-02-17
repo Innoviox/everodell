@@ -48,7 +48,7 @@ func (b *Bundle) add(o Bundle) {
 	b.nResin += o.nResin
 	b.nPebble += o.nPebble
 	b.nBerry += o.nBerry
-	b.nCards += o.nCards
+	b.nCards += o.nCards // todo max 8 cards
 	b.nPoints += o.nPoints
 }
 

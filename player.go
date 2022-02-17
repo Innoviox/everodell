@@ -10,4 +10,5 @@ type Player struct {
 
 func (p *Player) gain(b Bundle) {
 	p.resources.add(b)
+	// todo draw cards
 }
