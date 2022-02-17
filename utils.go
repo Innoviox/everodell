@@ -43,6 +43,15 @@ type Bundle struct {
 	nPoints int
 }
 
+func (b *Bundle) add(o Bundle) {
+	b.nTwig += o.nTwig
+	b.nResin += o.nResin
+	b.nPebble += o.nPebble
+	b.nBerry += o.nBerry
+	b.nCards += o.nCards
+	b.nPoints += o.nPoints
+}
+
 func readBundle(s string) Bundle {
 	var b Bundle
 
