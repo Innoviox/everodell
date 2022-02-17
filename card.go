@@ -13,6 +13,7 @@ type Card struct {
 	partner      string
 	points       int
 	construction bool
+	yield        Bundle
 
 	occupied bool
 
@@ -36,7 +37,7 @@ func (g *Game) readCards() {
 
 	g.deck = make([]Card, 0)
 
-	for i, line := range data {
+	for _, line := range data {
 		num := readInt(line[6])
 
 		for j := 0; j < num; j++ {
@@ -48,9 +49,32 @@ func (g *Game) readCards() {
 				partner:      line[4],
 				points:       readInt(line[5]),
 				construction: readBool(line[7]),
+				yield:        readBundle(line[8]),
 
 				occupied: false,
 			})
 		}
 	}
+}
+
+func (g *Game) canPlayCard(p *Player, c Card) int {
+	if p.fullCity() {
+		return 0 // 0 => can't play
+	}
+
+	for _, built := range p.city {
+		if built.name == c.partner && !built.occupied {
+			return 1 // => can play for free
+		}
+	}
+
+	if p.resources.canPay(c.cost) {
+		return 2 // => can play
+	}
+
+	return 0 // 0 => can't play
+}
+
+func (g *Game) triggerGreen(p *Player, c Card) {
+	p.gain(c.yield) // non-greens will have yield "0T"
 }
