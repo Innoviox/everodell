@@ -52,6 +52,20 @@ func (b *Bundle) add(o Bundle) {
 	b.nPoints += o.nPoints
 }
 
+func (b *Bundle) pay(o Bundle) {
+	b.nTwig -= o.nTwig
+	b.nResin -= o.nResin
+	b.nPebble -= o.nPebble
+	b.nBerry -= o.nBerry
+}
+
+func (b *Bundle) canPay(o Bundle) bool {
+	return b.nTwig > o.nTwig &&
+		b.nResin > o.nResin &&
+		b.nPebble > o.nPebble &&
+		b.nBerry > o.nBerry
+}
+
 func readBundle(s string) Bundle {
 	var b Bundle
 
