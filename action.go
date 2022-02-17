@@ -29,8 +29,8 @@ func (g *Game) ReadActions() {
 		panic(err)
 	}
 
-	specialActions := make([]Action, len(data))
-	g.actions = make([]Action, len(data))
+	specialActions := make([]Action, 0)
+	g.actions = make([]Action, 0)
 
 	for i, line := range data {
 		if i == 0 { // header
@@ -43,10 +43,10 @@ func (g *Game) ReadActions() {
 			nWorkers: 0,
 		}
 
-		if line[1] == "Yes" {
-			specialActions[i] = action
+		if readBool(line[1]) {
+			specialActions = append(specialActions, action)
 		} else {
-			g.actions[i] = action
+			g.actions = append(g.actions, action)
 		}
 	}
 

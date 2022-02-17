@@ -34,6 +34,23 @@ const (
 	Purple
 )
 
+func readColor(s string) Color {
+	switch s {
+	case "Tan":
+		return Tan
+	case "Green":
+		return Green
+	case "Red":
+		return Red
+	case "Blue":
+		return Blue
+	case "Purple":
+		return Purple
+	default:
+		panic("Invalid color")
+	}
+}
+
 type Bundle struct {
 	nTwig   int
 	nResin  int
@@ -103,6 +120,10 @@ func readInt(s string) int {
 	}
 
 	return n
+}
+
+func readBool(s string) bool {
+	return s == "Yes"
 }
 
 func sample[T](k int, arr []T) []T {
