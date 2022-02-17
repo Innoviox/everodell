@@ -15,7 +15,7 @@ type Card struct {
 	construction bool
 	yield        Bundle
 
-	occupied bool
+	occupied bool // if critter => partnered
 
 	// action *Action
 }
@@ -75,6 +75,43 @@ func (g *Game) canPlayCard(p *Player, c Card) int {
 	return 0 // 0 => can't play
 }
 
-func (g *Game) triggerGreen(p *Player, c Card) {
-	p.gain(c.yield) // non-greens will have yield "0T"
+func (g *Game) playCard(p *Player, c Card) {
+	n := g.canPlayCard(p, c)
+
+	if n == 0 {
+		return
+	} else if n == 1 {
+		for _, built := range p.city {
+			if built.name == c.partner {
+				built.occupied = true
+				c.occupied = true
+				break
+			}
+		}
+	} else {
+		p.resources.pay(c.cost)
+	}
+
+	p.city = append(p.city, c)
+
+	g.processPlay(p, c)
+}
+
+func (g *Game) processPlay(p *Player, c Card) {
+	switch c.color {
+	case Tan:
+	case Green:
+		p.gain(c.yield) // non-standards will have yield "0T"
+		g.trigger(p, c)
+	case Blue:
+	case Red:
+	case Purple:
+		return
+	}
+}
+
+func (g *Game) trigger(p *Player, c Card) {
+	switch c.name {
+
+	}
 }
