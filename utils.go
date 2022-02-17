@@ -1,6 +1,9 @@
 package everodell
 
-import "strings"
+import (
+	"math/rand"
+	"strings"
+)
 import "strconv"
 
 type Season int
@@ -67,4 +70,26 @@ func readBundle(s string) Bundle {
 	}
 
 	return b
+}
+
+func readInt(s string) int {
+	n, err := strconv.Atoi(s)
+
+	if err != nil {
+		n = 0
+	}
+
+	return n
+}
+
+func sample[T](k int, arr []T) []T {
+	var res []T
+
+	rand.Shuffle(len(arr), func(i, j int) { arr[i], arr[j] = arr[j], arr[i] })
+
+	for i := 0; i < k; i++ {
+		res = append(res, arr[i])
+	}
+
+	return res
 }
