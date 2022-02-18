@@ -138,3 +138,11 @@ func (g *Game) trigger(p *Player, c Card) {
 		}
 	}
 }
+
+func (g *Game) triggerGreens(p *Player) {
+	for _, c := range p.city {
+		if c.color == Green {
+			g.trigger(p, c)
+		}
+	}
+}

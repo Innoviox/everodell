@@ -13,6 +13,7 @@ const (
 	Spring
 	Summer
 	Autumn
+	Done
 )
 
 type Component int
