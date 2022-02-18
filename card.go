@@ -63,6 +63,10 @@ func (g *Game) canPlayCard(p *Player, c Card) int {
 		return 0 // 0 => can't play
 	}
 
+	if c.unique && len(find(p.city, c.name)) > 0 {
+		return 0 // 0 => can't play
+	}
+
 	for _, built := range find(p.city, c.partner) {
 		if built.construction && built.occupied == 0 {
 			return 1 // => can play for free

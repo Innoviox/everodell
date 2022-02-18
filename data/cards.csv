@@ -2,3 +2,11 @@ Name,Unique,Color,Cost,Partner,Points,Construction,Num,Yield
 Farm,No,Green,2T/R,HusbandWife,0,Yes,8,B
 Husband,No,Green,3B,Farm,0,No,4,0T
 Wife,No,Purple,2B,Farm,0,No,4,0T
+General Store,No,Green,R/P,Shopkeeper,0,Yes,3,B
+Shopkeeper,Yes,Blue,2B,General Store,0,No,3,0T
+Inn,No,Red,2T/R,Innkeeper,0,Yes,3,0T
+Innkeeper,Yes,Blue,B,Inn,0,No,3,0T
+Mine,No,Green,T/R/P,Miner mole,0,Yes,3,P
+Miner mole,No,Green,3B,Mine,0,No,3,0T
+Post office,No,Red,T/2R,Postal pigeon,0,Yes,3,0T
+Postal pigeon,No,Tan,2B,Post office,0,No,3,0T
